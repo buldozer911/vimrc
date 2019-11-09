@@ -5,9 +5,9 @@ set exrc  										" Allows project specific .vimrc
 
 "Auto install Plug https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 
@@ -48,14 +48,14 @@ call plug#end()            " required
 " Theme settings 
 colors OceanicNext
 if (has("termguicolors"))
-  "set termguicolors
+	"set termguicolors
 	set t_Co=256
 endif
 
- 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Core Functionality (general settings, keyboard shortcuts)
- """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " deal with swps and backups here
 " create backups
 set backup
@@ -68,20 +68,8 @@ set ttimeoutlen=0          " https://stackoverflow.com/questions/37644682/why-is
 set ttyfast                " Rendering
 set tw=500
 " Disable Autocommenting
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-" map jk to esc
-:imap jk <Esc>
-
-" save with zz
-nnoremap zz :update<cr>
-
-" set clipboard to easily copy from vim and paste into OSx
-set clipboard=unnamed
-
-" ctrl + p fzf search
-nnoremap <C-p> :Files<Cr>
-let mapleader = " "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => netrw
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Don't really use this anymore, but leaving in here for reference
@@ -96,22 +84,24 @@ let mapleader = " "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Changes NerdTree Toggle to Ctrl + n
 map <C-n> :NERDTreeToggle<CR> 
-autocmd VimEnter * NERDTree "Toggles Nerdtree on vim open
-let NERDTreeQuitOnOpen = 1 "closes NerdTree when opening a file
+"autocmd VimEnter * NERDTree "Toggles Nerdtree on vim open
+"let NERDTreeQuitOnOpen = 1 "closes NerdTree when opening a file
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Conquer of Completion 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " use <tab> for trigger completion and navigate to the next complete item
+let g:coc_node_path ='/home/sushil/.nvm/versions/node/v10.16.3/bin/node'
+
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
 inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
+			\ pumvisible() ? "\<C-n>" :
+			\ <SID>check_back_space() ? "\<Tab>" :
+			\ coc#refresh()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -144,8 +134,8 @@ set t_vb=
 highlight Visual cterm=bold ctermbg=Blue ctermfg=NONE
 " Change cursor shape between insert and normal mode in iTerm2.app
 if $TERM_PROGRAM =~ "iTerm"
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+	let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+	let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
 
 " Shows the title within the window
@@ -175,3 +165,28 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 au BufRead,BufNewFile *.prisma setfiletype graphql
 
 set secure "disables unsafe commands in project specific .vimrc
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" My Settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" map jk to esc
+:imap jk <Esc>
+:imap kj <Esc>
+:imap ii <Esc>
+" save with zz
+nnoremap zz :update<cr>
+
+" set clipboard to easily copy from vim and paste into OSx
+set clipboard=unnamedplus
+
+" ctrl + p fzf search
+nnoremap <C-p> :Files<Cr>
+let mapleader = " "
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+set splitbelow
+set splitright
