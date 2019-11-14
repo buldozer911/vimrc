@@ -1,3 +1,6 @@
+set hidden
+syntax on
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set exrc  										" Allows project specific .vimrc
@@ -25,15 +28,20 @@ Plug 'vim-airline/vim-airline-themes' "Applicable themes
 Plug 'pangloss/vim-javascript' "JS highlighting
 Plug 'mxw/vim-jsx' "JSX syntax highlighting
 Plug 'jparise/vim-graphql' "graphql syntax highlighting
-Plug 'digitaltoad/vim-pug' "Pug highlighting
+"Plug 'digitaltoad/vim-pug' "Pug highlighting
+"Plug 'terryma/vim-multiple-cursors'
 
 " Tools
 Plug 'mitermayer/vim-prettier'
 Plug 'jiangmiao/auto-pairs' "Autocomplete brackets. 
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
+"Plug 'SirVer/ultisnips'
+"Plug 'mlaursen/vim-react-snippets'
+Plug 'vimwiki/vimwiki'
 
 Plug 'tpope/vim-fugitive' "Git tools
+Plug 'tpope/vim-unimpaired'
 
 
 Plug 'mattn/emmet-vim' "A bit annoying because it takes over my Tab key
@@ -103,7 +111,20 @@ inoremap <silent><expr> <Tab>
 			\ <SID>check_back_space() ? "\<Tab>" :
 			\ coc#refresh()
 
-
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -172,7 +193,6 @@ set secure "disables unsafe commands in project specific .vimrc
 " map jk to esc
 :imap jk <Esc>
 :imap kj <Esc>
-:imap ii <Esc>
 " save with zz
 nnoremap zz :update<cr>
 
@@ -190,3 +210,17 @@ nnoremap <C-H> <C-W><C-H>
 
 set splitbelow
 set splitright
+set cmdheight=2
+set updatetime=300
+
+"let g:multi_cursor_use_default_mapping=0
+
+" Default mapping
+"let g:multi_cursor_start_word_key      = '<C-i>'
+"let g:multi_cursor_select_all_word_key = '<A-i>'
+"let g:multi_cursor_start_key           = 'g<C-i>'
+"let g:multi_cursor_select_all_key      = 'g<A-i>'
+"let g:multi_cursor_next_key            = '<C-i>'
+"let g:multi_cursor_prev_key            = '<C-p>'
+"let g:multi_cursor_skip_key            = '<C-x>'
+"let g:multi_cursor_quit_key            = '<Esc>'
